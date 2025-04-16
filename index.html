@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b8b">
+    <meta name="description" content="سیستەمی هەڵگرتنی ئەرکی ماڵەوە - Kelan Abdullah">
     <title>Kelan Abdullah - سیستمێ هەڵگرتنی ئەرکی ماڵەوە</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItij2YrYtNmI2KfZhdi12KfZhNmK2Kkg2KfZhNix2YrYr9in2YTYpyIsCiAgInNob3J0X25hbWUiOiAi2KPZitmK2KkiLAogICJkZXNjcmlwdGlvbiI6ICLYo9mK2LTZiNin2YXYtdin2YTZitipINin2YTYsdmK2K/Yp9mE2KcgLSBLZWxhbiBBYmR1bGxhaCIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmOWZiIiwKICAidGhlbWVfY29sb3IiOiAiI2ZmNjI4YiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImljb24tMTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29uLTUxMi5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
     <style>
         :root {
             --primary-color: #ff6b8b;
@@ -25,6 +28,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -85,6 +89,10 @@
             font-weight: 500;
         }
         
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
         .btn:hover {
             background-color: var(--accent-color);
             transform: translateY(-2px);
@@ -115,6 +123,12 @@
             align-items: center;
             justify-content: center;
             min-height: 120px;
+            user-select: none;
+        }
+        
+        .category-btn:active {
+            transform: scale(0.98);
+            background-color: var(--secondary-color);
         }
         
         .delete-btn {
@@ -167,6 +181,10 @@
             padding: 8px 12px;
             border-radius: 8px;
             transition: var(--transition);
+        }
+        
+        .back-btn:active {
+            background-color: var(--secondary-color);
         }
         
         .week-tasks {
@@ -228,6 +246,10 @@
             transition: var(--transition);
         }
         
+        .task-action-btn:active {
+            transform: scale(0.9);
+        }
+        
         .task-delete-btn {
             background-color: var(--delete-color);
         }
@@ -259,6 +281,10 @@
             width: 100%;
             transition: var(--transition);
             font-weight: 500;
+        }
+        
+        .add-task-btn:active {
+            transform: scale(0.98);
         }
         
         .file-upload {
@@ -431,6 +457,18 @@
                 margin-bottom: 10px;
             }
         }
+        
+        /* PWA Styles */
+        @media (display-mode: standalone) {
+            body {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+            
+            header {
+                padding-top: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -543,9 +581,9 @@
         // زانیارییەکان لە localStorage هەڵدەگرین
         let categories = JSON.parse(localStorage.getItem('categories')) || ['خوێندن', 'کارەکانی ماڵ', 'پڕۆژەکان'];
         let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        let currentFiles = JSON.parse(localStorage.getItem('currentFiles')) || {};
         const daysOfWeek = ['شەممە', 'یەکشەممە', 'دووشەممە', 'سێشەممە', 'چوارشەممە', 'پێنجشەممە', 'هەینی'];
         let currentEditTask = { category: '', day: '', index: -1 };
-        let currentFiles = {};
 
         // DOM Elements
         const mainPage = document.getElementById('main-page');
@@ -559,6 +597,7 @@
         function init() {
             renderCategories();
             setupEventListeners();
+            setupPWA();
         }
 
         // نیشاندانی دوگمەکان
@@ -574,7 +613,16 @@
                     <button class="delete-btn">×</button>
                 `;
                 
-                btn.addEventListener('click', () => showTaskPage(category));
+                btn.addEventListener('click', () => {
+                    btn.style.transform = 'scale(0.98)';
+                    btn.style.backgroundColor = 'var(--secondary-color)';
+                    setTimeout(() => {
+                        btn.style.transform = '';
+                        btn.style.backgroundColor = '';
+                        showTaskPage(category);
+                    }, 150);
+                });
+                
                 btn.querySelector('.delete-btn').addEventListener('click', (e) => {
                     e.stopPropagation();
                     if (confirm(`دڵنیای لە ڕەشکردنەوەی ${category}?`)) {
@@ -745,12 +793,81 @@
         function saveData() {
             localStorage.setItem('categories', JSON.stringify(categories));
             localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem('currentFiles', JSON.stringify(currentFiles));
         }
 
         // هەموو پەڕەکان دەشارێنەوە
         function hideAllPages() {
             document.querySelectorAll('.page').forEach(page => {
                 page.style.display = 'none';
+            });
+        }
+
+        // PWA Setup
+        function setupPWA() {
+            // Register service worker
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    const CACHE_NAME = 'home-tasks-v1';
+                    const ASSETS_TO_CACHE = [
+                        '/',
+                        '/index.html',
+                        '/styles.css',
+                        '/app.js',
+                        '/icon-192.png',
+                        '/icon-512.png'
+                    ];
+
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.addAll(ASSETS_TO_CACHE))
+                        );
+                    });
+
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => response || fetch(event.request))
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl).then(registration => {
+                    console.log('ServiceWorker registration successful');
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            }
+            
+            // Add to home screen prompt
+            let deferredPrompt;
+            const addBtn = document.getElementById('add-category-btn');
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                
+                // Show install button if not already installed
+                if (!window.matchMedia('(display-mode: standalone)').matches) {
+                    const installBtn = document.createElement('button');
+                    installBtn.className = 'btn';
+                    installBtn.style.marginTop = '20px';
+                    installBtn.innerHTML = '<i class="fas fa-download"></i> دامەزراندنی ئەپ';
+                    installBtn.addEventListener('click', () => {
+                        deferredPrompt.prompt();
+                        deferredPrompt.userChoice.then((choiceResult) => {
+                            if (choiceResult.outcome === 'accepted') {
+                                console.log('User accepted install prompt');
+                            }
+                            deferredPrompt = null;
+                        });
+                    });
+                    document.querySelector('header').appendChild(installBtn);
+                }
             });
         }
 
@@ -787,8 +904,12 @@
             fileInput.addEventListener('change', (e) => {
                 const category = document.getElementById('task-category-name').textContent;
                 if (e.target.files.length > 0) {
-                    currentFiles[category] = e.target.files[0];
+                    currentFiles[category] = {
+                        name: e.target.files[0].name,
+                        lastModified: e.target.files[0].lastModified
+                    };
                     fileNameDisplay.textContent = `فایلی هەڵبژێردراو: ${currentFiles[category].name}`;
+                    saveData();
                 }
             });
             
