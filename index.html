@@ -91,10 +91,6 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
-        .btn:active {
-            transform: translateY(0);
-        }
-        
         .buttons-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -121,12 +117,6 @@
             min-height: 120px;
         }
         
-        .category-btn:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-        
         .delete-btn {
             position: absolute;
             top: -10px;
@@ -147,39 +137,12 @@
             z-index: 2;
         }
         
-        .edit-btn {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: var(--edit-color);
-            color: white;
-            border: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: var(--transition);
-            z-index: 2;
-        }
-        
-        .category-btn:hover .delete-btn,
-        .category-btn:hover .edit-btn {
+        .category-btn:hover .delete-btn {
             opacity: 1;
         }
         
         .page {
             display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         .task-header {
@@ -206,10 +169,6 @@
             transition: var(--transition);
         }
         
-        .back-btn:hover {
-            background-color: rgba(255, 71, 133, 0.1);
-        }
-        
         .week-tasks {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -234,11 +193,6 @@
             font-weight: 600;
         }
         
-        .day-tasks {
-            min-height: 150px;
-            margin-bottom: 15px;
-        }
-        
         .day-task {
             background-color: var(--task-bg);
             padding: 12px 15px;
@@ -252,40 +206,6 @@
             padding-right: 40px;
         }
         
-        .day-task:hover {
-            transform: translateX(5px);
-        }
-        
-        .task-actions {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            display: flex;
-            gap: 5px;
-        }
-        
-        .task-action-btn {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            border: none;
-            color: white;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .task-delete-btn {
-            background-color: var(--delete-color);
-        }
-        
-        .task-edit-btn {
-            background-color: var(--edit-color);
-        }
-        
         .task-input {
             width: 100%;
             padding: 15px;
@@ -296,13 +216,6 @@
             font-family: inherit;
             font-size: 1rem;
             margin-bottom: 15px;
-            transition: var(--transition);
-        }
-        
-        .task-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(255, 107, 139, 0.2);
         }
         
         .add-task-btn {
@@ -318,35 +231,8 @@
             font-weight: 500;
         }
         
-        .add-task-btn:hover {
-            background-color: var(--accent-color);
-        }
-        
         .file-upload {
             margin: 25px 0;
-        }
-        
-        .file-label {
-            display: block;
-            margin-bottom: 12px;
-            color: var(--accent-color);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-        
-        .file-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px dashed var(--secondary-color);
-            border-radius: var(--border-radius);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .file-input:hover {
-            border-color: var(--primary-color);
-            background-color: rgba(255, 214, 224, 0.2);
         }
         
         .task-container {
@@ -354,55 +240,6 @@
             padding: 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-        }
-        
-        .add-category-form {
-            display: none;
-            margin-top: 30px;
-            background-color: white;
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--accent-color);
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--secondary-color);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(255, 107, 139, 0.2);
-        }
-        
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 25px;
-        }
-        
-        .view-all-btn {
-            background-color: var(--accent-color);
         }
         
         .tasks-table {
@@ -427,100 +264,12 @@
             padding: 12px 15px;
             border-bottom: 1px solid var(--secondary-color);
             word-wrap: break-word;
-            white-space: normal;
-            overflow: visible;
-            text-overflow: clip;
-        }
-        
-        .tasks-table td:nth-child(2) {
-            min-width: 200px;
-            max-width: 400px;
-        }
-        
-        .tasks-table tr:last-child td {
-            border-bottom: none;
         }
         
         .tasks-table tr:nth-child(even) {
             background-color: var(--light-color);
         }
         
-        .attachment-icon {
-            color: var(--accent-color);
-            margin-left: 5px;
-        }
-        
-        .screenshot-btn {
-            background-color: #4CAF50;
-        }
-        
-        .screenshot-btn:hover {
-            background-color: #3e8e41;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #666;
-        }
-        
-        .empty-state i {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-        }
-        
-        .edit-task-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            width: 90%;
-            max-width: 500px;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .modal-title {
-            color: var(--accent-color);
-            font-size: 1.3rem;
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        /* وەشانە موبایلەکان */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -533,82 +282,11 @@
             .week-tasks {
                 grid-template-columns: 1fr;
             }
-            
-            .task-container, .add-category-form, .modal-content {
-                padding: 20px;
-            }
-            
-            .form-actions, .modal-actions {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .btn {
-                width: 100%;
-                padding: 14px;
-            }
-            
-            .task-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .task-header h2 {
-                order: -1;
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-            
-            .tasks-table {
-                font-size: 0.85rem;
-            }
-            
-            .tasks-table th,
-            .tasks-table td {
-                padding: 8px 10px;
-            }
-            
-            .tasks-table td:nth-child(2) {
-                min-width: 150px;
-                max-width: 250px;
-            }
-        }
-        
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            .all-tasks-page, .all-tasks-page * {
-                visibility: visible;
-            }
-            .all-tasks-page {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                padding: 0;
-                margin: 0;
-                background: white;
-            }
-            .back-btn, .screenshot-btn {
-                display: none;
-            }
-            .task-container {
-                box-shadow: none;
-                padding: 20px 0;
-            }
-            .logo {
-                display: block !important;
-                text-align: center;
-                margin-bottom: 20px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- پەڕەی سەرەکی -->
         <div id="main-page" class="page" style="display: block;">
             <header>
                 <div class="logo">
@@ -623,37 +301,9 @@
                 دوگمەی نوێ زیاد بکە
             </button>
             
-            <div class="add-category-form" id="add-category-form">
-                <div class="form-group">
-                    <label for="category-name">ناوی دوگمە:</label>
-                    <input type="text" id="category-name" placeholder="ناوی دوگمە بنووسە">
-                </div>
-                <div class="form-actions">
-                    <button id="cancel-add-category" class="btn" style="background-color: #ccc;">
-                        <i class="fas fa-times"></i>
-                        پاشگەز بونەوە
-                    </button>
-                    <button id="save-category" class="btn">
-                        <i class="fas fa-save"></i>
-                        هەڵگرتن
-                    </button>
-                </div>
-            </div>
-            
-            <div id="categories-container">
-                <div class="buttons-container" id="buttons-container">
-                    <!-- دوگمەکان لێرە دێن -->
-                </div>
-                
-                <div id="empty-state" class="empty-state" style="display: none;">
-                    <i class="fas fa-folder-open"></i>
-                    <h3>هیچ دوگمەیەک نییە</h3>
-                    <p>دوگمەیەکی نوێ زیاد بکە بۆ دەستپێکردن</p>
-                </div>
-            </div>
+            <div class="buttons-container" id="buttons-container"></div>
         </div>
         
-        <!-- پەڕەی ئەرکەکان -->
         <div id="task-page" class="page">
             <div class="task-container">
                 <div class="task-header">
@@ -662,30 +312,24 @@
                         گەڕانەوە
                     </button>
                     <h2 id="task-category-name">ئەرکەکان</h2>
-                    <button id="view-all-tasks" class="btn view-all-btn">
+                    <button id="view-all-tasks" class="btn">
                         <i class="fas fa-list"></i>
                         نیشانی هەموو ئەرکەکان
                     </button>
                 </div>
                 
-                <div class="week-tasks" id="week-tasks">
-                    <!-- ئەرکەکانی هەفتەکە لێرە دێن -->
-                </div>
+                <div class="week-tasks" id="week-tasks"></div>
                 
                 <div class="file-upload">
-                    <label class="file-label">
+                    <label class="btn">
                         <i class="fas fa-paperclip"></i>
-                        بەڵگەنامە زیاد بکە:
+                        بەڵگەنامە زیاد بکە
+                        <input type="file" id="file-input" style="display: none;">
                     </label>
-                    <label for="file-input" class="file-input">
-                        <i class="fas fa-cloud-upload-alt"></i> پەنجە بنێ لێرە بۆ هەڵگرتنی فایل
-                    </label>
-                    <input type="file" id="file-input" style="display: none;">
                 </div>
             </div>
         </div>
         
-        <!-- پەڕەی هەموو ئەرکەکان -->
         <div id="all-tasks-page" class="page">
             <div class="task-container">
                 <div class="task-header">
@@ -697,475 +341,204 @@
                         <i class="fas fa-tasks"></i>
                         <span>Kelan Abdullah</span>
                     </div>
-                    <button id="screenshot-btn" class="btn screenshot-btn">
-                        <i class="fas fa-camera"></i>
-                        وێنەی هەفتەکە وەربگرە
-                    </button>
                 </div>
                 
                 <h2 id="all-tasks-title" style="text-align: center; margin: 20px 0; color: var(--accent-color);">هەموو ئەرکەکان</h2>
                 
-                <div id="all-tasks-container">
-                    <table class="tasks-table" id="tasks-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 20%;">ڕۆژ</th>
-                                <th style="width: 60%;">ئەرک</th>
-                                <th style="width: 20%;">بەڵگەنامە</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tasks-table-body">
-                            <!-- ئەرکەکان لێرە دێن -->
-                        </tbody>
-                    </table>
-                    
-                    <div id="all-tasks-empty" class="empty-state" style="display: none;">
-                        <i class="fas fa-tasks"></i>
-                        <h3>هیچ ئەرکێک نییە</h3>
-                        <p>ئەرکێک زیاد بکە بۆ دەستپێکردن</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Modal بۆ دەستکاری کردنی ئەرک -->
-        <div class="edit-task-modal" id="edit-task-modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">دەستکاری کردنی ئەرک</h3>
-                    <button class="close-modal" id="close-modal">&times;</button>
-                </div>
-                <div class="form-group">
-                    <label for="edit-task-text">ئەرک:</label>
-                    <textarea id="edit-task-text" class="task-input" placeholder="ئەرکێکی نوێ بنووسە..."></textarea>
-                </div>
-                <div class="modal-actions">
-                    <button id="cancel-edit" class="btn" style="background-color: #ccc;">
-                        <i class="fas fa-times"></i>
-                        پاشگەز بونەوە
-                    </button>
-                    <button id="save-edit" class="btn">
-                        <i class="fas fa-save"></i>
-                        هەڵگرتن
-                    </button>
-                </div>
+                <table class="tasks-table" id="tasks-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">ڕۆژ</th>
+                            <th style="width: 60%;">ئەرک</th>
+                            <th style="width: 20%;">بەڵگەنامە</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tasks-table-body"></tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <script>
-        // زانیارییەکان لە localStorage هەڵدەگرین
-        let categories = JSON.parse(localStorage.getItem('categories')) || [];
+        // Data
+        let categories = JSON.parse(localStorage.getItem('categories')) || ['خوێندن', 'کارەکانی ماڵ', 'پڕۆژەکان'];
         let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-        
-        // ناوی ڕۆژەکانی هەفتە
         const daysOfWeek = ['شەممە', 'یەکشەممە', 'دووشەممە', 'سێشەممە', 'چوارشەممە', 'پێنجشەممە', 'هەینی'];
-        
-        // زانیارییەکان بۆ دەستکاری کردنی ئەرک
-        let currentEditTask = {
-            category: '',
-            day: '',
-            index: -1
-        };
-        
+
         // DOM Elements
-        const mainPage = document.getElementById('main-page');
-        const taskPage = document.getElementById('task-page');
-        const allTasksPage = document.getElementById('all-tasks-page');
-        const buttonsContainer = document.getElementById('buttons-container');
-        const emptyState = document.getElementById('empty-state');
-        const allTasksEmpty = document.getElementById('all-tasks-empty');
-        const editTaskModal = document.getElementById('edit-task-modal');
-        const editTaskText = document.getElementById('edit-task-text');
-        
-        // گۆڕینی نێوان پەڕەکان
-        document.getElementById('add-category-btn').addEventListener('click', function() {
-            document.getElementById('add-category-form').style.display = 'block';
-        });
-        
-        document.getElementById('cancel-add-category').addEventListener('click', function() {
-            document.getElementById('add-category-form').style.display = 'none';
-        });
-        
-        // هەڵگرتنی دوگمەی نوێ
-        document.getElementById('save-category').addEventListener('click', function() {
-            const categoryName = document.getElementById('category-name').value.trim();
-            if (categoryName) {
-                addCategory(categoryName);
-                document.getElementById('category-name').value = '';
-                document.getElementById('add-category-form').style.display = 'none';
-            }
-        });
-        
-        // زیادکردنی دوگمەی نوێ
-        function addCategory(name) {
-            if (!categories.includes(name)) {
-                categories.push(name);
-                localStorage.setItem('categories', JSON.stringify(categories));
-                renderCategories();
-                checkEmptyState();
-            }
-        }
-        
-        // ڕەشکردنەوەی دوگمە
-        function deleteCategory(name) {
-            categories = categories.filter(cat => cat !== name);
-            localStorage.setItem('categories', JSON.stringify(categories));
-            
-            // ئەرکەکانی ئەم دوگمەیەش ڕەش دەکەینەوە
-            if (tasks[name]) {
-                delete tasks[name];
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-            }
-            
+        const pages = {
+            main: document.getElementById('main-page'),
+            task: document.getElementById('task-page'),
+            allTasks: document.getElementById('all-tasks-page')
+        };
+
+        // Initialize
+        function init() {
             renderCategories();
-            checkEmptyState();
+            setupEventListeners();
         }
-        
-        // دەستکاری کردنی ناوی دوگمە
-        function editCategory(oldName, newName) {
-            const index = categories.indexOf(oldName);
-            if (index !== -1) {
-                categories[index] = newName;
-                localStorage.setItem('categories', JSON.stringify(categories));
-                
-                // ئەگەر ئەرکی هەیە بۆ ئەم دوگمەیە، ناوەکەی دەستکاری دەکەین
-                if (tasks[oldName]) {
-                    tasks[newName] = tasks[oldName];
-                    delete tasks[oldName];
-                    localStorage.setItem('tasks', JSON.stringify(tasks));
-                }
-                
-                renderCategories();
-            }
-        }
-        
-        // پشکنینی بۆ بوونی دوگمە
-        function checkEmptyState() {
-            if (categories.length === 0) {
-                emptyState.style.display = 'block';
-                buttonsContainer.style.display = 'none';
-            } else {
-                emptyState.style.display = 'none';
-                buttonsContainer.style.display = 'grid';
-            }
-        }
-        
-        // نیشاندانی دوگمەکان
+
+        // Render Categories
         function renderCategories() {
-            buttonsContainer.innerHTML = '';
+            const container = document.getElementById('buttons-container');
+            container.innerHTML = '';
             
             categories.forEach(category => {
-                const button = document.createElement('div');
-                button.className = 'category-btn';
+                const btn = document.createElement('div');
+                btn.className = 'category-btn';
+                btn.innerHTML = `
+                    <i class="fas fa-folder" style="margin-bottom: 10px; font-size: 1.8rem; color: var(--accent-color);"></i>
+                    <div>${category}</div>
+                    <button class="delete-btn">×</button>
+                `;
                 
-                const icon = document.createElement('i');
-                icon.className = 'fas fa-folder';
-                icon.style.marginBottom = '10px';
-                icon.style.fontSize = '1.8rem';
-                icon.style.color = 'var(--accent-color)';
-                
-                const text = document.createElement('div');
-                text.textContent = category;
-                
-                button.appendChild(icon);
-                button.appendChild(text);
-                
-                button.addEventListener('click', function() {
-                    showTaskPage(category);
-                });
-                
-                // دوگمەی ڕەشکردنەوە
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'delete-btn';
-                deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
-                deleteBtn.addEventListener('click', function(e) {
+                btn.addEventListener('click', () => showTaskPage(category));
+                btn.querySelector('.delete-btn').addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (confirm(`دڵنیای لە ڕەشکردنەوەی "${category}"?`)) {
+                    if (confirm(`دڵنیای لە ڕەشکردنەوەی ${category}?`)) {
                         deleteCategory(category);
                     }
                 });
                 
-                // دوگمەی دەستکاریکردن
-                const editBtn = document.createElement('button');
-                editBtn.className = 'edit-btn';
-                editBtn.innerHTML = '<i class="fas fa-edit"></i>';
-                editBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const newName = prompt(`ناوی نوێ بۆ "${category}":`, category);
-                    if (newName && newName.trim() !== '' && newName !== category) {
-                        editCategory(category, newName.trim());
-                    }
-                });
-                
-                button.appendChild(deleteBtn);
-                button.appendChild(editBtn);
-                buttonsContainer.appendChild(button);
+                container.appendChild(btn);
             });
+            
+            localStorage.setItem('categories', JSON.stringify(categories));
         }
-        
-        // نیشاندانی پەڕەی ئەرکەکان
-        function showTaskPage(categoryName) {
+
+        // Show Task Page
+        function showTaskPage(category) {
             hideAllPages();
-            taskPage.style.display = 'block';
-            document.getElementById('task-category-name').textContent = categoryName;
-            
-            renderWeekTasks(categoryName);
+            pages.task.style.display = 'block';
+            document.getElementById('task-category-name').textContent = category;
+            renderWeekTasks(category);
         }
-        
-        // نیشاندانی ئەرکەکانی هەفتە
-        function renderWeekTasks(categoryName) {
-            const weekContainer = document.getElementById('week-tasks');
-            weekContainer.innerHTML = '';
+
+        // Render Week Tasks
+        function renderWeekTasks(category) {
+            const container = document.getElementById('week-tasks');
+            container.innerHTML = '';
             
-            // دروستکردنی ستوونەکان بۆ هەر ڕۆژێک
-            daysOfWeek.forEach((day, index) => {
-                const dayColumn = document.createElement('div');
-                dayColumn.className = 'day-column';
+            daysOfWeek.forEach(day => {
+                const dayCol = document.createElement('div');
+                dayCol.className = 'day-column';
+                dayCol.innerHTML = `
+                    <div class="day-header">${day}</div>
+                    <div class="day-tasks"></div>
+                    <textarea class="task-input" placeholder="ئەرکێکی نوێ بنووسە..."></textarea>
+                    <button class="add-task-btn">
+                        <i class="fas fa-plus"></i> زیادکردنی ئەرک
+                    </button>
+                `;
                 
-                const dayHeader = document.createElement('div');
-                dayHeader.className = 'day-header';
-                dayHeader.textContent = day;
-                dayColumn.appendChild(dayHeader);
+                const tasksContainer = dayCol.querySelector('.day-tasks');
+                const taskInput = dayCol.querySelector('.task-input');
+                const addBtn = dayCol.querySelector('.add-task-btn');
                 
-                // ئەرکەکانی ئەم ڕۆژە
-                const dayTasksContainer = document.createElement('div');
-                dayTasksContainer.className = 'day-tasks';
-                dayColumn.appendChild(dayTasksContainer);
-                
-                // نیشاندانی ئەرکەکانی پێشوو
-                if (tasks[categoryName] && tasks[categoryName][day]) {
-                    tasks[categoryName][day].forEach((task, taskIndex) => {
-                        const taskElement = document.createElement('div');
-                        taskElement.className = 'day-task';
-                        taskElement.textContent = task.text;
-                        
-                        if (task.file) {
-                            const fileIcon = document.createElement('i');
-                            fileIcon.className = 'fas fa-paperclip attachment-icon';
-                            taskElement.prepend(fileIcon);
-                        }
-                        
-                        // دوگمەی کردارەکان
-                        const taskActions = document.createElement('div');
-                        taskActions.className = 'task-actions';
-                        
-                        // دوگمەی ڕەشکردنەوەی ئەرک
-                        const deleteTaskBtn = document.createElement('button');
-                        deleteTaskBtn.className = 'task-action-btn task-delete-btn';
-                        deleteTaskBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
-                        deleteTaskBtn.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            if (confirm(`دڵنیای لە ڕەشکردنەوەی ئەم ئەرکە?`)) {
-                                tasks[categoryName][day].splice(taskIndex, 1);
-                                localStorage.setItem('tasks', JSON.stringify(tasks));
-                                renderWeekTasks(categoryName);
-                            }
-                        });
-                        
-                        // دوگمەی دەستکاریکردنی ئەرک
-                        const editTaskBtn = document.createElement('button');
-                        editTaskBtn.className = 'task-action-btn task-edit-btn';
-                        editTaskBtn.innerHTML = '<i class="fas fa-edit"></i>';
-                        editTaskBtn.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            openEditTaskModal(categoryName, day, taskIndex, task.text);
-                        });
-                        
-                        taskActions.appendChild(editTaskBtn);
-                        taskActions.appendChild(deleteTaskBtn);
-                        taskElement.appendChild(taskActions);
-                        dayTasksContainer.appendChild(taskElement);
+                // Render existing tasks
+                if (tasks[category]?.[day]) {
+                    tasks[category][day].forEach((task, index) => {
+                        const taskEl = document.createElement('div');
+                        taskEl.className = 'day-task';
+                        taskEl.textContent = task.text;
+                        tasksContainer.appendChild(taskEl);
                     });
                 }
                 
-                // زیادکردنی ئەرکی نوێ
-                const taskInput = document.createElement('textarea');
-                taskInput.className = 'task-input';
-                taskInput.placeholder = 'ئەرکێکی نوێ بنووسە...';
-                dayColumn.appendChild(taskInput);
-                
-                const addTaskBtn = document.createElement('button');
-                addTaskBtn.className = 'add-task-btn';
-                addTaskBtn.innerHTML = '<i class="fas fa-plus"></i> زیادکردنی ئەرک';
-                addTaskBtn.addEventListener('click', function() {
-                    const taskText = taskInput.value.trim();
-                    if (taskText) {
-                        addTask(categoryName, day, taskText);
+                // Add new task
+                addBtn.addEventListener('click', () => {
+                    const text = taskInput.value.trim();
+                    if (text) {
+                        if (!tasks[category]) tasks[category] = {};
+                        if (!tasks[category][day]) tasks[category][day] = [];
+                        
+                        tasks[category][day].push({ text });
+                        localStorage.setItem('tasks', JSON.stringify(tasks));
                         taskInput.value = '';
-                        renderWeekTasks(categoryName);
+                        renderWeekTasks(category);
                     }
                 });
-                dayColumn.appendChild(addTaskBtn);
                 
-                weekContainer.appendChild(dayColumn);
+                container.appendChild(dayCol);
             });
         }
-        
-        // کردنەوەی modalی دەستکاریکردن
-        function openEditTaskModal(category, day, index, text) {
-            currentEditTask = { category, day, index };
-            editTaskText.value = text;
-            editTaskModal.style.display = 'flex';
-        }
-        
-        // داخستنی modalی دەستکاریکردن
-        function closeEditTaskModal() {
-            editTaskModal.style.display = 'none';
-            currentEditTask = { category: '', day: '', index: -1 };
-            editTaskText.value = '';
-        }
-        
-        // هەڵگرتنی دەستکارییەکان
-        function saveEditedTask() {
-            const newText = editTaskText.value.trim();
-            if (newText && currentEditTask.index !== -1) {
-                tasks[currentEditTask.category][currentEditTask.day][currentEditTask.index].text = newText;
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-                renderWeekTasks(currentEditTask.category);
-                closeEditTaskModal();
-            }
-        }
-        
-        // زیادکردنی ئەرکی نوێ
-        function addTask(category, day, text, file = null) {
-            if (!tasks[category]) {
-                tasks[category] = {};
-            }
-            
-            if (!tasks[category][day]) {
-                tasks[category][day] = [];
-            }
-            
-            tasks[category][day].push({
-                text: text,
-                file: file ? file.name : null
-            });
-            
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
-        
-        // گەڕانەوە بۆ پەڕەی سەرەکی
-        document.getElementById('back-btn').addEventListener('click', function() {
+
+        // Show All Tasks
+        function showAllTasks(category) {
             hideAllPages();
-            mainPage.style.display = 'block';
-        });
-        
-        // نیشاندانی هەموو ئەرکەکان
-        document.getElementById('view-all-tasks').addEventListener('click', function() {
-            const categoryName = document.getElementById('task-category-name').textContent;
-            showAllTasksPage(categoryName);
-        });
-        
-        // نیشاندانی پەڕەی هەموو ئەرکەکان
-        function showAllTasksPage(categoryName) {
-            hideAllPages();
-            allTasksPage.style.display = 'block';
+            pages.allTasks.style.display = 'block';
+            document.getElementById('all-tasks-title').textContent = `هەموو ئەرکەکان - ${category}`;
             
-            document.getElementById('all-tasks-title').textContent = `هەموو ئەرکەکان - ${categoryName}`;
-            renderAllTasksTable(categoryName);
-        }
-        
-        // نیشاندانی هەموو ئەرکەکان بە شێوازی خشتە
-        function renderAllTasksTable(categoryName) {
             const tableBody = document.getElementById('tasks-table-body');
             tableBody.innerHTML = '';
             
-            let hasTasks = false;
-            
-            if (tasks[categoryName]) {
-                Object.entries(tasks[categoryName]).forEach(([day, dayTasks]) => {
-                    if (dayTasks.length > 0) {
-                        hasTasks = true;
-                    }
-                    
+            if (tasks[category]) {
+                Object.entries(tasks[category]).forEach(([day, dayTasks]) => {
                     dayTasks.forEach(task => {
                         const row = document.createElement('tr');
-                        
-                        const dayCell = document.createElement('td');
-                        dayCell.textContent = day;
-                        row.appendChild(dayCell);
-                        
-                        const taskCell = document.createElement('td');
-                        taskCell.textContent = task.text;
-                        row.appendChild(taskCell);
-                        
-                        const fileCell = document.createElement('td');
-                        if (task.file) {
-                            fileCell.innerHTML = `<i class="fas fa-paperclip attachment-icon"></i> ${task.file}`;
-                        } else {
-                            fileCell.textContent = '-';
-                        }
-                        row.appendChild(fileCell);
-                        
+                        row.innerHTML = `
+                            <td>${day}</td>
+                            <td>${task.text}</td>
+                            <td>${task.file || '-'}</td>
+                        `;
                         tableBody.appendChild(row);
                     });
                 });
             }
-            
-            if (hasTasks) {
-                document.getElementById('tasks-table').style.display = 'table';
-                allTasksEmpty.style.display = 'none';
-            } else {
-                document.getElementById('tasks-table').style.display = 'none';
-                allTasksEmpty.style.display = 'block';
-            }
         }
-        
-        // گەڕانەوە لە پەڕەی هەموو ئەرکەکان
-        document.getElementById('back-from-all').addEventListener('click', function() {
-            const categoryName = document.getElementById('all-tasks-title').textContent.split(' - ')[1];
-            showTaskPage(categoryName);
-        });
-        
-        // فایل زیاد دەکەین
-        document.getElementById('file-input').addEventListener('change', function(e) {
-            const files = e.target.files;
-            if (files.length > 0) {
-                const categoryName = document.getElementById('task-category-name').textContent;
-                alert(`فایل "${files[0].name}" زیادکرا بۆ ${categoryName}`);
-                // لێرە دەتوانیت فایلەکە هەڵبگریت یان نیشانی بدەیت
-            }
-        });
-        
-        // وێنەگرتن لە پەڕەی هەموو ئەرکەکان
-        document.getElementById('screenshot-btn').addEventListener('click', function() {
-            window.print();
-        });
-        
-        // Modal Event Listeners
-        document.getElementById('close-modal').addEventListener('click', closeEditTaskModal);
-        document.getElementById('cancel-edit').addEventListener('click', closeEditTaskModal);
-        document.getElementById('save-edit').addEventListener('click', saveEditedTask);
-        
-        // داخستنی modal بە کلیک کردنی لە دەرەوەی
-        editTaskModal.addEventListener('click', function(e) {
-            if (e.target === editTaskModal) {
-                closeEditTaskModal();
-            }
-        });
-        
-        // هەموو پەڕەکان دەشارێنەوە
+
+        // Delete Category
+        function deleteCategory(category) {
+            categories = categories.filter(c => c !== category);
+            if (tasks[category]) delete tasks[category];
+            localStorage.setItem('categories', JSON.stringify(categories));
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderCategories();
+        }
+
+        // Helper Functions
         function hideAllPages() {
-            document.querySelectorAll('.page').forEach(page => {
-                page.style.display = 'none';
+            Object.values(pages).forEach(page => page.style.display = 'none');
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Add Category
+            document.getElementById('add-category-btn').addEventListener('click', () => {
+                const name = prompt('ناوی دوگمەی نوێ:');
+                if (name && !categories.includes(name)) {
+                    categories.push(name);
+                    renderCategories();
+                }
+            });
+            
+            // Back Buttons
+            document.getElementById('back-btn').addEventListener('click', () => {
+                hideAllPages();
+                pages.main.style.display = 'block';
+            });
+            
+            document.getElementById('back-from-all').addEventListener('click', () => {
+                const category = document.getElementById('all-tasks-title').textContent.split(' - ')[1];
+                showTaskPage(category);
+            });
+            
+            // View All Tasks
+            document.getElementById('view-all-tasks').addEventListener('click', () => {
+                const category = document.getElementById('task-category-name').textContent;
+                showAllTasks(category);
+            });
+            
+            // File Input
+            document.getElementById('file-input').addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    alert(`فایل ${e.target.files[0].name} زیادکرا`);
+                }
             });
         }
-        
-        // دەستپێکردنی سیستەمەکە
-        function init() {
-            // ئەگەر هیچ دوگمەیەک نییە، دوگمەی نموونەیی زیاد دەکەین
-            if (categories.length === 0) {
-                categories = ['خوێندن', 'کارەکانی ماڵ', 'پڕۆژەکان'];
-                localStorage.setItem('categories', JSON.stringify(categories));
-            }
-            
-            renderCategories();
-            checkEmptyState();
-        }
-        
-        // دەستپێکردن
-        window.onload = init;
+
+        // Initialize App
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
