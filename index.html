@@ -7,7 +7,6 @@
     <meta name="description" content="سیستەمی هەڵگرتنی ئەرکی ماڵەوە - Kelan Abdullah">
     <title>Kelan Abdullah - سیستمێ هەڵگرتنی ئەرکی ماڵەوە</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItij2YrYtNmI2KfZhdi12KfZhNmK2Kkg2KfZhNix2YrYr9in2YTYpyIsCiAgInNob3J0X25hbWUiOiAi2KPZitmK2KkiLAogICJkZXNjcmlwdGlvbiI6ICLYo9mK2LTZiNin2YXYtdin2YTZitipINin2YTYsdmK2K/Yp9mE2KcgLSBLZWxhbiBBYmR1bGxhaCIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmOWZiIiwKICAidGhlbWVfY29sb3IiOiAiI2ZmNjI4YiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImljb24tMTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29uLTUxMi5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
     <style>
         :root {
             --primary-color: #ff6b8b;
@@ -17,6 +16,7 @@
             --light-color: #fff9fb;
             --delete-color: #ff6b6b;
             --edit-color: #4a90e2;
+            --note-color: #f5e769;
             --table-header: #ffb3c6;
             --task-bg: #fff0f5;
             --border-radius: 12px;
@@ -350,6 +350,44 @@
             background-color: var(--light-color);
         }
         
+        /* ستایلەکانی تایبەت بە تێبینیەکان */
+        .notes-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .notes-table td {
+            position: relative;
+            padding: 15px;
+            border-bottom: 1px solid var(--secondary-color);
+            background-color: var(--light-color);
+            word-break: break-word;
+        }
+        
+        .notes-actions {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        
+        .note-content {
+            width: calc(100% - 60px);
+            padding-right: 10px;
+        }
+        
+        .empty-notes-message {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+        
         .attachment-icon {
             color: var(--accent-color);
             margin-left: 5px;
@@ -404,6 +442,175 @@
             margin-top: 20px;
         }
         
+        /* Settings Modal */
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .settings-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .settings-section {
+            margin-bottom: 20px;
+        }
+        
+        .settings-title {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+        
+        .color-option {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .color-option.selected {
+            border-color: var(--text-color);
+        }
+        
+        .add-note-btn {
+            background-color: var(--note-color);
+            color: #333;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .add-note-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .view-notes-btn {
+            background-color: var(--note-color);
+            color: #333;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: var(--transition);
+            font-weight: 500;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .view-notes-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* Welcome Modal */
+        .welcome-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .welcome-content {
+            background: linear-gradient(135deg, #ff6b8b, #ff8b6b);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .welcome-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+        
+        .welcome-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .welcome-message {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .welcome-btn {
+            background-color: white;
+            color: var(--accent-color);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .welcome-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .welcome-btn:active {
+            transform: translateY(0);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        
         /* وەشانە موبایلەکان */
         @media (max-width: 768px) {
             .container {
@@ -431,7 +638,12 @@
                 padding: 8px 10px;
             }
             
-            .modal-content {
+            .notes-table td {
+                padding-right: 70px !important;
+            }
+            
+            .modal-content,
+            .settings-content {
                 padding: 20px;
             }
             
@@ -456,6 +668,22 @@
                 text-align: center;
                 margin-bottom: 10px;
             }
+            
+            .welcome-content {
+                padding: 20px;
+            }
+            
+            .welcome-icon {
+                font-size: 3rem;
+            }
+            
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+            
+            .welcome-message {
+                font-size: 1rem;
+            }
         }
         
         /* PWA Styles */
@@ -472,9 +700,27 @@
     </style>
 </head>
 <body>
+    <!-- Welcome Modal -->
+    <div class="welcome-modal" id="welcome-modal">
+        <div class="welcome-content">
+            <div class="welcome-icon">
+                <i class="fas fa-tasks"></i>
+            </div>
+            <h2 class="welcome-title">بەخێربێن بۆ سیستەمەکە</h2>
+            <p class="welcome-message">
+                سیستەمی نوێی هەڵگرتنی ئەرک بۆ گرووپ [ب]<br>
+                ئەم سیستەمە یارمەتیت دەدات بە ڕێکخستنی ئەرکەکانی ماڵەوە و خوێندن
+            </p>
+            <button class="welcome-btn" id="accept-welcome">
+                <i class="fas fa-check-circle"></i>
+                ڕازیبوون
+            </button>
+        </div>
+    </div>
+
     <div class="container">
         <!-- پەڕەی سەرەکی -->
-        <div id="main-page" class="page" style="display: block;">
+        <div id="main-page" class="page">
             <header>
                 <div class="logo">
                     <i class="fas fa-tasks"></i>
@@ -483,10 +729,16 @@
                 <h1>سیستەمێ هەڵگرتنی ئەرکی ماڵەوە</h1>
             </header>
             
-            <button id="add-category-btn" class="btn">
-                <i class="fas fa-plus"></i>
-                دوگمەی نوێ زیاد بکە
-            </button>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                <button id="add-category-btn" class="btn">
+                    <i class="fas fa-plus"></i>
+                    دوگمەی نوێ زیاد بکە
+                </button>
+                <button id="settings-btn" class="btn" style="background-color: #6b8bff;">
+                    <i class="fas fa-cog"></i>
+                    ڕێکخستنەکان
+                </button>
+            </div>
             
             <div class="buttons-container" id="buttons-container"></div>
         </div>
@@ -521,6 +773,16 @@
                     </div>
                     <div id="file-name" style="margin-top: 10px; font-size: 0.9rem;"></div>
                 </div>
+                
+                <button id="add-note-btn" class="add-note-btn">
+                    <i class="fas fa-sticky-note"></i>
+                    ئەرکی زیادە (تێبینی)
+                </button>
+                
+                <button id="view-notes-btn" class="view-notes-btn">
+                    <i class="fas fa-book-open"></i>
+                    نیشانی هەموو تێبینییەکان
+                </button>
             </div>
         </div>
         
@@ -555,6 +817,35 @@
             </div>
         </div>
         
+        <!-- پەڕەی هەموو تێبینییەکان -->
+        <div id="all-notes-page" class="page">
+            <div class="task-container">
+                <div class="task-header">
+                    <button class="back-btn" id="back-from-notes">
+                        <i class="fas fa-arrow-right"></i>
+                        گەڕانەوە
+                    </button>
+                    <div class="logo">
+                        <i class="fas fa-sticky-note"></i>
+                        <span>Kelan Abdullah</span>
+                    </div>
+                </div>
+                
+                <h2 id="all-notes-title" style="text-align: center; margin: 20px 0; color: var(--accent-color);">هەموو تێبینییەکان</h2>
+                
+                <div style="overflow-x: auto;">
+                    <table class="notes-table" id="notes-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 100%;">تێبینی</th>
+                            </tr>
+                        </thead>
+                        <tbody id="notes-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
         <!-- Modal بۆ دەستکاری کردنی ئەرک -->
         <div class="edit-task-modal" id="edit-task-modal">
             <div class="modal-content">
@@ -575,29 +866,163 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Modal بۆ تێبینی -->
+        <div class="edit-task-modal" id="note-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">تێبینی نوێ</h3>
+                    <button class="close-modal" id="close-note-modal">&times;</button>
+                </div>
+                <textarea id="note-text" class="task-input" placeholder="تێبینی خۆت بنووسە..."></textarea>
+                <div class="modal-actions">
+                    <button id="cancel-note" class="btn" style="background-color: #ccc;">
+                        <i class="fas fa-times"></i>
+                        پاشگەز بونەوە
+                    </button>
+                    <button id="save-note" class="btn" style="background-color: var(--note-color); color: #333;">
+                        <i class="fas fa-save"></i>
+                        هەڵگرتن
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal بۆ ڕێکخستنەکان -->
+        <div class="settings-modal" id="settings-modal">
+            <div class="settings-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">ڕێکخستنەکان</h3>
+                    <button class="close-modal" id="close-settings">&times;</button>
+                </div>
+                
+                <div class="settings-section">
+                    <h4 class="settings-title">ڕەنگی سەرەکی</h4>
+                    <div>
+                        <div class="color-option selected" style="background-color: #ff6b8b;" data-color="#ff6b8b"></div>
+                        <div class="color-option" style="background-color: #6b8bff;" data-color="#6b8bff"></div>
+                        <div class="color-option" style="background-color: #6bff8b;" data-color="#6bff8b"></div>
+                        <div class="color-option" style="background-color: #ff8b6b;" data-color="#ff8b6b"></div>
+                        <div class="color-option" style="background-color: #8b6bff;" data-color="#8b6bff"></div>
+                        <div class="color-option" style="background-color: #ff6bd6;" data-color="#ff6bd6"></div>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4 class="settings-title">ڕەنگی پاڵپشتی</h4>
+                    <div>
+                        <div class="color-option selected" style="background-color: #fff9fb;" data-color="#fff9fb"></div>
+                        <div class="color-option" style="background-color: #f9fbff;" data-color="#f9fbff"></div>
+                        <div class="color-option" style="background-color: #f9fff9;" data-color="#f9fff9"></div>
+                        <div class="color-option" style="background-color: #fffbf9;" data-color="#fffbf9"></div>
+                        <div class="color-option" style="background-color: #fbf9ff;" data-color="#fbf9ff"></div>
+                        <div class="color-option" style="background-color: #fff9f9;" data-color="#fff9f9"></div>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4 class="settings-title">ڕێکخستنەکانی تر</h4>
+                    <div style="margin-top: 15px;">
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            دۆخی تاریک
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="notifications-toggle">
+                            ئاگادارکردنەوەکان
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="modal-actions" style="margin-top: 30px;">
+                    <button id="save-settings" class="btn">
+                        <i class="fas fa-save"></i>
+                        هەڵگرتنی گۆڕانکارییەکان
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         // زانیارییەکان لە localStorage هەڵدەگرین
         let categories = JSON.parse(localStorage.getItem('categories')) || ['خوێندن', 'کارەکانی ماڵ', 'پڕۆژەکان'];
         let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        let notes = JSON.parse(localStorage.getItem('notes')) || {};
         let currentFiles = JSON.parse(localStorage.getItem('currentFiles')) || {};
         const daysOfWeek = ['شەممە', 'یەکشەممە', 'دووشەممە', 'سێشەممە', 'چوارشەممە', 'پێنجشەممە', 'هەینی'];
-        let currentEditTask = { category: '', day: '', index: -1 };
+        let currentEditTask = { category: '', day: '', index: -1, isNote: false };
+        let currentCategory = '';
+        let settings = JSON.parse(localStorage.getItem('settings')) || {
+            primaryColor: '#ff6b8b',
+            lightColor: '#fff9fb',
+            darkMode: false,
+            notifications: true,
+            welcomeShown: false
+        };
 
         // DOM Elements
         const mainPage = document.getElementById('main-page');
         const taskPage = document.getElementById('task-page');
         const allTasksPage = document.getElementById('all-tasks-page');
+        const allNotesPage = document.getElementById('all-notes-page');
         const buttonsContainer = document.getElementById('buttons-container');
         const fileInput = document.getElementById('file-input');
         const fileNameDisplay = document.getElementById('file-name');
+        const settingsModal = document.getElementById('settings-modal');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const notificationsToggle = document.getElementById('notifications-toggle');
+        const welcomeModal = document.getElementById('welcome-modal');
+        const acceptWelcomeBtn = document.getElementById('accept-welcome');
 
         // فەرمانی دەستپێکردن
         function init() {
+            // چاککردنی کێشەی خەزنکردن
+            if (!localStorage.getItem('tasks')) {
+                tasks = {};
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+            if (!localStorage.getItem('notes')) {
+                notes = {};
+                localStorage.setItem('notes', JSON.stringify(notes));
+            }
+            
+            applySettings();
             renderCategories();
             setupEventListeners();
             setupPWA();
+            
+            // نیشاندانی پەیامی بەخێربێن بۆ یەکەمجار
+            if (!settings.welcomeShown) {
+                welcomeModal.style.display = 'flex';
+            } else {
+                mainPage.style.display = 'block';
+            }
+        }
+
+        // جێبەجێکردنی ڕێکخستنەکان
+        function applySettings() {
+            // ڕەنگەکان
+            document.documentElement.style.setProperty('--primary-color', settings.primaryColor);
+            document.documentElement.style.setProperty('--accent-color', settings.primaryColor);
+            document.documentElement.style.setProperty('--light-color', settings.lightColor);
+            
+            // دۆخی تاریک
+            if (settings.darkMode) {
+                document.body.classList.add('dark-mode');
+                document.documentElement.style.setProperty('--text-color', '#f0f0f0');
+                document.documentElement.style.setProperty('--task-bg', '#2a2a2a');
+                document.documentElement.style.setProperty('--secondary-color', '#444');
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.documentElement.style.setProperty('--text-color', '#333');
+                document.documentElement.style.setProperty('--task-bg', '#fff0f5');
+                document.documentElement.style.setProperty('--secondary-color', '#ffd6e0');
+            }
+            
+            // تۆگڵەکان
+            darkModeToggle.checked = settings.darkMode;
+            notificationsToggle.checked = settings.notifications;
         }
 
         // نیشاندانی دوگمەکان
@@ -638,6 +1063,7 @@
 
         // نیشاندانی پەڕەی ئەرکەکان
         function showTaskPage(category) {
+            currentCategory = category;
             hideAllPages();
             taskPage.style.display = 'block';
             document.getElementById('task-category-name').textContent = category;
@@ -733,11 +1159,56 @@
             });
         }
 
-        // کردنەوەی modalی دەستکاریکردن
+        // کردنەوەی modalی تێبینی
+        function openNoteModal() {
+            document.getElementById('note-text').value = '';
+            document.getElementById('note-modal').style.display = 'flex';
+        }
+
+        // داخستنی modalی تێبینی
+        function closeNoteModal() {
+            document.getElementById('note-modal').style.display = 'none';
+        }
+
+        // هەڵگرتنی تێبینی نوێ - چارەسەرکراوە
+        function saveNewNote() {
+            const noteText = document.getElementById('note-text').value.trim();
+            if (noteText) {
+                if (!notes[currentCategory]) {
+                    notes[currentCategory] = [];
+                }
+                
+                notes[currentCategory].push({
+                    text: noteText,
+                    createdAt: new Date().toISOString()
+                });
+                
+                saveData();
+                closeNoteModal();
+                
+                // نیشاندانی تێبینیە نوێیەکان
+                showAllNotes(currentCategory);
+                
+                if (settings.notifications) {
+                    showNotification('تێبینی نوێ زیادکرا', 'تێبینیەکەت زیادکرا');
+                }
+            }
+        }
+
+        // کردنەوەی modalی دەستکاریکردنی ئەرک
         function openEditModal(category, day, index, text) {
-            currentEditTask = { category, day, index };
+            currentEditTask = { category, day, index, isNote: false };
             document.getElementById('edit-task-text').value = text;
             document.getElementById('edit-task-modal').style.display = 'flex';
+            document.querySelector('.modal-title').textContent = 'دەستکاری کردنی ئەرک';
+        }
+
+        // کردنەوەی modalی دەستکاریکردنی تێبینی
+        function openEditNoteModal(category, index, text) {
+            currentEditTask = { category, day: '', index, isNote: true };
+            document.getElementById('edit-task-text').value = text;
+            document.getElementById('edit-task-modal').style.display = 'flex';
+            document.querySelector('.modal-title').textContent = 'دەستکاری کردنی تێبینی';
         }
 
         // داخستنی modalی دەستکاریکردن
@@ -745,14 +1216,23 @@
             document.getElementById('edit-task-modal').style.display = 'none';
         }
 
-        // هەڵگرتنی دەستکارییەکان
+        // هەڵگرتنی دەستکارییەکان - چارەسەرکراوە
         function saveEditedTask() {
             const newText = document.getElementById('edit-task-text').value.trim();
             if (newText && currentEditTask.index !== -1) {
-                tasks[currentEditTask.category][currentEditTask.day][currentEditTask.index].text = newText;
+                if (currentEditTask.isNote) {
+                    notes[currentEditTask.category][currentEditTask.index].text = newText;
+                } else {
+                    tasks[currentEditTask.category][currentEditTask.day][currentEditTask.index].text = newText;
+                }
                 saveData();
-                renderWeekTasks(currentEditTask.category);
                 closeEditModal();
+                
+                if (currentEditTask.isNote) {
+                    showAllNotes(currentEditTask.category);
+                } else {
+                    renderWeekTasks(currentEditTask.category);
+                }
             }
         }
 
@@ -780,10 +1260,75 @@
             }
         }
 
+        // نیشاندانی هەموو تێبینییەکان - چارەسەرکراوە بۆ شوێنی دوگمەکان
+        function showAllNotes(category) {
+            hideAllPages();
+            allNotesPage.style.display = 'block';
+            document.getElementById('all-notes-title').textContent = `هەموو تێبینییەکان - ${category}`;
+            
+            const tableBody = document.getElementById('notes-table-body');
+            tableBody.innerHTML = '';
+            
+            if (notes[category]) {
+                notes[category].forEach((note, index) => {
+                    const row = document.createElement('tr');
+                    
+                    const noteCell = document.createElement('td');
+                    noteCell.style.position = 'relative';
+                    
+                    // نوسینەکە
+                    const noteContent = document.createElement('div');
+                    noteContent.className = 'note-content';
+                    noteContent.textContent = note.text;
+                    noteCell.appendChild(noteContent);
+                    
+                    // زیادکردنی دوگمەی دەستکاری و سڕینەوە لە لای ڕاست
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'notes-actions';
+                    
+                    const editBtn = document.createElement('button');
+                    editBtn.className = 'task-action-btn task-edit-btn';
+                    editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                    editBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openEditNoteModal(category, index, note.text);
+                    });
+                    
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'task-action-btn task-delete-btn';
+                    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (confirm('دڵنیای لە سڕینەوەی ئەم تێبینییە؟')) {
+                            notes[category].splice(index, 1);
+                            saveData();
+                            showAllNotes(category);
+                        }
+                    });
+                    
+                    actionsDiv.appendChild(editBtn);
+                    actionsDiv.appendChild(deleteBtn);
+                    noteCell.appendChild(actionsDiv);
+                    
+                    row.appendChild(noteCell);
+                    tableBody.appendChild(row);
+                });
+            } else {
+                // نیشاندانی پەیامی کە تێبینی بوونی نییە
+                const row = document.createElement('tr');
+                const noteCell = document.createElement('td');
+                noteCell.textContent = 'هیچ تێبینیەک بوونی نییە';
+                noteCell.className = 'empty-notes-message';
+                row.appendChild(noteCell);
+                tableBody.appendChild(row);
+            }
+        }
+
         // ڕەشکردنەوەی دوگمە
         function deleteCategory(category) {
             categories = categories.filter(c => c !== category);
             if (tasks[category]) delete tasks[category];
+            if (notes[category]) delete notes[category];
             if (currentFiles[category]) delete currentFiles[category];
             saveData();
             renderCategories();
@@ -791,9 +1336,17 @@
 
         // هەڵگرتنی زانیارییەکان
         function saveData() {
-            localStorage.setItem('categories', JSON.stringify(categories));
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            localStorage.setItem('currentFiles', JSON.stringify(currentFiles));
+            try {
+                localStorage.setItem('categories', JSON.stringify(categories));
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                localStorage.setItem('notes', JSON.stringify(notes));
+                localStorage.setItem('currentFiles', JSON.stringify(currentFiles));
+                localStorage.setItem('settings', JSON.stringify(settings));
+                console.log("Data saved successfully");
+            } catch (e) {
+                console.error("Error saving data:", e);
+                alert("هەڵە ڕوویدا لە هەڵگرتنی زانیارییەکان!");
+            }
         }
 
         // هەموو پەڕەکان دەشارێنەوە
@@ -803,9 +1356,21 @@
             });
         }
 
+        // نیشاندانی ئاگاداری
+        function showNotification(title, message) {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, { body: message });
+            } else if ('Notification' in window && Notification.permission !== 'denied') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        new Notification(title, { body: message });
+                    }
+                });
+            }
+        }
+
         // PWA Setup
         function setupPWA() {
-            // Register service worker
             if ('serviceWorker' in navigator) {
                 const swCode = `
                     const CACHE_NAME = 'home-tasks-v1';
@@ -851,7 +1416,6 @@
                 e.preventDefault();
                 deferredPrompt = e;
                 
-                // Show install button if not already installed
                 if (!window.matchMedia('(display-mode: standalone)').matches) {
                     const installBtn = document.createElement('button');
                     installBtn.className = 'btn';
@@ -871,15 +1435,55 @@
             });
         }
 
-        // Event Listeners
+        // Event Listeners - چارەسەرکراوە
         function setupEventListeners() {
             // زیادکردنی دوگمەی نوێ
             document.getElementById('add-category-btn').addEventListener('click', () => {
                 const name = prompt('ناوی دوگمەی نوێ:');
                 if (name && !categories.includes(name)) {
                     categories.push(name);
+                    saveData();
                     renderCategories();
                 }
+            });
+            
+            // کردنەوەی ڕێکخستنەکان
+            document.getElementById('settings-btn').addEventListener('click', () => {
+                settingsModal.style.display = 'flex';
+            });
+            
+            // داخستنی ڕێکخستنەکان
+            document.getElementById('close-settings').addEventListener('click', () => {
+                settingsModal.style.display = 'none';
+            });
+            
+            // هەڵگرتنی ڕێکخستنەکان
+            document.getElementById('save-settings').addEventListener('click', () => {
+                settings.darkMode = darkModeToggle.checked;
+                settings.notifications = notificationsToggle.checked;
+                saveData();
+                applySettings();
+                settingsModal.style.display = 'none';
+            });
+            
+            // هەڵبژاردنی ڕەنگی سەرەکی
+            document.querySelectorAll('.color-option[data-color]').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.color-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    
+                    if (this.parentElement.previousElementSibling.textContent.includes('سەرەکی')) {
+                        settings.primaryColor = this.dataset.color;
+                        document.documentElement.style.setProperty('--primary-color', this.dataset.color);
+                        document.documentElement.style.setProperty('--accent-color', this.dataset.color);
+                    } else {
+                        settings.lightColor = this.dataset.color;
+                        document.documentElement.style.setProperty('--light-color', this.dataset.color);
+                    }
+                    saveData();
+                });
             });
             
             // گەڕانەوە بۆ پەڕەی سەرەکی
@@ -894,10 +1498,22 @@
                 showTaskPage(category);
             });
             
+            // گەڕانەوە لە پەڕەی هەموو تێبینییەکان
+            document.getElementById('back-from-notes').addEventListener('click', () => {
+                const category = document.getElementById('all-notes-title').textContent.split(' - ')[1];
+                showTaskPage(category);
+            });
+            
             // نیشاندانی هەموو ئەرکەکان
             document.getElementById('view-all-tasks').addEventListener('click', () => {
                 const category = document.getElementById('task-category-name').textContent;
                 showAllTasks(category);
+            });
+            
+            // نیشاندانی هەموو تێبینییەکان
+            document.getElementById('view-notes-btn').addEventListener('click', () => {
+                const category = document.getElementById('task-category-name').textContent;
+                showAllNotes(category);
             });
             
             // هەڵبژاردنی فایل
@@ -913,6 +1529,12 @@
                 }
             });
             
+            // زیادکردنی تێبینی
+            document.getElementById('add-note-btn').addEventListener('click', openNoteModal);
+            document.getElementById('close-note-modal').addEventListener('click', closeNoteModal);
+            document.getElementById('cancel-note').addEventListener('click', closeNoteModal);
+            document.getElementById('save-note').addEventListener('click', saveNewNote);
+            
             // Modal Event Listeners
             document.getElementById('close-modal').addEventListener('click', closeEditModal);
             document.getElementById('cancel-edit').addEventListener('click', closeEditModal);
@@ -922,6 +1544,36 @@
             document.getElementById('edit-task-modal').addEventListener('click', (e) => {
                 if (e.target === document.getElementById('edit-task-modal')) {
                     closeEditModal();
+                }
+            });
+            
+            document.getElementById('note-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('note-modal')) {
+                    closeNoteModal();
+                }
+            });
+            
+            document.getElementById('settings-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('settings-modal')) {
+                    settingsModal.style.display = 'none';
+                }
+            });
+            
+            // ڕازیبوون لە پەیامی بەخێربێن
+            acceptWelcomeBtn.addEventListener('click', () => {
+                settings.welcomeShown = true;
+                saveData();
+                welcomeModal.style.display = 'none';
+                mainPage.style.display = 'block';
+            });
+            
+            // داخستنی پەیامی بەخێربێن بە کلیک کردنی لە دەرەوەی
+            welcomeModal.addEventListener('click', (e) => {
+                if (e.target === welcomeModal) {
+                    settings.welcomeShown = true;
+                    saveData();
+                    welcomeModal.style.display = 'none';
+                    mainPage.style.display = 'block';
                 }
             });
         }
